@@ -4,10 +4,9 @@ const router = express.Router();
 //importing data model schemas
 let { eventdata } = require("../models/models"); 
 
-//GET all entries
+//GET all entries from eventdata in postman get eventdata works
 router.get("/", (req, res, next) => { 
-    eventdata.find( 
-        (error, data) => {
+    eventdata.find((error, data) => {
             if (error) {
                 return next(error);
             } else {
@@ -65,10 +64,9 @@ router.get("/client/:id", (req, res, next) => {
     );
 });
 
-//POST
+//POST event
 router.post("/", (req, res, next) => { 
-    eventdata.create( 
-        req.body, 
+    eventdata.create(req.body, 
         (error, data) => { 
             if (error) {
                 return next(error);
