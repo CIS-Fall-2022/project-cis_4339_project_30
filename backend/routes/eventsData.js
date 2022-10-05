@@ -77,6 +77,17 @@ router.post("/", (req, res, next) => {
     );
 });
 
+//Delete for event data
+router.route("/remove").delete(function(req, res) {
+    eventdata.remove({ _id: req.body._id }, function(err, result) {
+      if (err) {
+        console.err(err);
+      } else {
+        res.json(result);
+      }
+    });
+  });
+
 //PUT
 router.put("/:id", (req, res, next) => {
     eventdata.findOneAndUpdate(

@@ -78,6 +78,17 @@ router.post("/", (req, res, next) => {
     primarydata.createdAt instanceof Date;
 });
 
+//Delete for Client Intake form
+router.route("/remove").delete(function(req, res) {
+    primarydata.remove({ _id: req.body._id }, function(err, result) {
+      if (err) {
+        console.err(err);
+      } else {
+        res.json(result);
+      }
+    });
+  });
+
 //PUT update (make sure req body doesn't have the id)
 router.put("/:id", (req, res, next) => { 
     primarydata.findOneAndUpdate( 
