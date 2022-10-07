@@ -4,7 +4,7 @@ const router = express.Router();
 //importing data model schemas
 let { primarydata } = require("../models/models"); 
 let { eventdata } = require("../models/models"); 
-let { organizationData } = require("../models/models"); 
+let { organizationdata } = require("../models/models"); 
 
 //GET all entries
 router.get("/", (req, res, next) => { 
@@ -60,6 +60,17 @@ router.get("/search/", (req, res, next) => {
 router.get("/events/:id", (req, res, next) => { 
     
 });
+// DELETE
+// ALSO DELETE THE ATEENDESS
+router.route("/remove").delete(function(req, res) {
+    primarydata.remove({ _id: req.body._id }, function(err, result) {
+      if (err) {
+        console.err(err);
+      } else {
+        res.json(result);
+      }
+    });
+  });
 
 //POST
 router.post("/", (req, res, next) => { 

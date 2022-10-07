@@ -4,6 +4,8 @@ const router = express.Router();
 //importing data model schemas
 let { eventdata } = require("../models/models"); 
 
+//for organizations we nned a post 
+// add new routers
 //GET all entries from eventdata in postman get eventdata works
 router.get("/", (req, res, next) => { 
     eventdata.find((error, data) => {
@@ -14,7 +16,7 @@ router.get("/", (req, res, next) => {
             }
         }
     ).sort({ 'updatedAt': -1 }).limit(10);
-});
+});// do i need a res.send or res.redirect?
 
 //GET single entry by ID
 router.get("/id/:id", (req, res, next) => { 
@@ -27,8 +29,9 @@ router.get("/id/:id", (req, res, next) => {
     })
 });
 
-//GET entries based on search query
-//Ex: '...?eventName=Food&searchBy=name' 
+//GET entries based on search query/
+// ASK 
+//Ex: 'QUERY...?eventName=Food&searchBy=name' 
 router.get("/search/", (req, res, next) => { 
     let dbQuery = "";
     if (req.query["searchBy"] === 'name') {
@@ -64,14 +67,15 @@ router.get("/client/:id", (req, res, next) => {
     );
 });
 
-//POST event
-router.post("/", (req, res, next) => { 
+//POST
+router.post("/event", (req, res, next) => { 
     eventdata.create(req.body, 
         (error, data) => { 
             if (error) {
                 return next(error);
             } else {
                 res.json(data);
+                //res.send('event is added to the database')
             }
         }
     );
@@ -102,7 +106,7 @@ router.put("/:id", (req, res, next) => {
         }
     );
 });
-
+// DELETE ALSO INCLUDES THE ATTENDEES
 //PUT add attendee to event
 router.put("/addAttendee/:id", (req, res, next) => {
     //only add attendee if not yet signed uo

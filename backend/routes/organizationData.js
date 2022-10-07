@@ -2,11 +2,27 @@ const express = require("express");
 const router = express.Router();
 
 //importing data model schemas
-let { organizationData } = require("../models/models"); 
+let { organizationdata } = require("../models/models"); 
 
-//GET all entries
-router.get("/", (req, res, next) => { 
-    primarydata.find( 
+
+//POST add data to the database 
+router.post("/", (req, res, next) => { 
+    organizationdata.create(req.body, 
+        (error, data) => { 
+            if (error) {
+                return next(error);
+            } else {
+                res.json(data);
+                //res.send('event is added to the database')
+            }
+        }
+    );
+});
+
+//GET all entries, just the name you need for the organization
+router.get("/:name", (req, res, next) => { 
+    console.log( req.params.name)
+    organizationdata.findOne( {name: req.params.name},
         (error, data) => {
             if (error) {
                 return next(error);
@@ -17,7 +33,7 @@ router.get("/", (req, res, next) => {
                 res.json(data)
             }
         }
-    ).sort({ 'updatedAt': -1 }).limit(10);
+    );
 });
 
 module.exports = router;
