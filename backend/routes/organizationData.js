@@ -5,7 +5,7 @@ const router = express.Router();
 let { organizationdata } = require("../models/models"); 
 
 
-//POST
+//POST add data to the database 
 router.post("/", (req, res, next) => { 
     organizationdata.create(req.body, 
         (error, data) => { 
@@ -19,7 +19,7 @@ router.post("/", (req, res, next) => {
     );
 });
 
-//GET all entries, just the name you need 
+//GET all entries, just the name you need for the organization
 router.get("/:name", (req, res, next) => { 
     console.log( req.params.name)
     organizationdata.findOne( {name: req.params.name},
