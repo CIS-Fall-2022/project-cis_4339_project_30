@@ -100,6 +100,22 @@ router.route("/remove").delete(function(req, res) {
     });
   });
 
+//This is how an attendee gets deleted from an event 
+router.put("/attendeeremove/:id", (req, res, next) => { 
+    eventdata.findOneAndUpdate( 
+        { _id: req.params.id,
+        attendees: req.body.attendee_id },
+        {$pull: {attendees: req.body.attendee_id}},
+        (error, data) => {
+            if (error) {
+                return next(error);
+            } else {
+                res.json('attendee removed');
+            }
+        }
+    );
+});
+
 //PUT update (make sure req body doesn't have the id)
 router.put("/:id", (req, res, next) => { 
     primarydata.findOneAndUpdate( 
