@@ -92,6 +92,31 @@ router.route("/remove").delete(function(req, res) {
     });
   });
 
+
+
+// Counts total number of event attendees for each event
+router.get("/eventAttendees",(req,res,next)=>{​​​​​​​​
+    varcheckDate=newDate() 
+    
+    eventdata.aggregate([
+    {​​​​​​​​$match:{​​​​​​​​date:{​​​​​​​​
+    $gt:newDate(checkDate.setMonth(checkDate.getMonth() -2)),
+    $lt:newDate()
+    }​​​​​​​​}​​​​​​​​}​​​​​​​​,
+    {​​​​​​​​$group:{​​​​​​​​_id:"$eventName",total:{​​​​​​​​$sum:{​​​​​​​​$size:"$attendees"}​​​​​​​​}​​​​​​​​}​​​​​​​​}​​​​​​​​
+     ],
+    (error,data)=>{​​​​​​​​
+    if (error) {​​​​​​​​
+    returnnext(error);
+    }​​​​​​​​else{​​​​​​​​
+    res.json(data);
+    }​​​​​​​​
+    }​​​​​​​​
+     )
+    }​​​​​​​​);
+
+
+
 //PUT
 router.put("/:id", (req, res, next) => {
     eventdata.findOneAndUpdate(
