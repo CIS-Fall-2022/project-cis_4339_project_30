@@ -93,7 +93,7 @@ router.route("/remove").delete(function(req, res) {
   });
 
 
-
+/*
 // Counts total number of event attendees for each event
 router.get("/eventAttendees",(req,res,next)=>{​​​​​​​​
     varcheckDate=newDate() 
@@ -114,7 +114,7 @@ router.get("/eventAttendees",(req,res,next)=>{​​​​​​​​
     }​​​​​​​​
      )
     }​​​​​​​​);
-
+*/
 
 
 //PUT
