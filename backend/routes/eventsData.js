@@ -83,8 +83,8 @@ router.post("/", (req, res, next) => {
 });
 
 //Delete for event data
-router.route("/remove").delete(function(req, res) {
-    eventdata.remove({ _id: req.body._id }, function(err, result) {
+router.route("/remove/:id").delete(function(req, res) {
+    eventdata.remove({ _id: req.params.id }, function(err, result) {
       if (err) {
         console.err(err);
       } else {
@@ -131,6 +131,9 @@ router.put("/addAttendee/:id", (req, res, next) => {
                         }
                     );
                 }
+                else {
+                    const broke = 'already added'
+                    res.send(broke)}
                 
             }
         }
