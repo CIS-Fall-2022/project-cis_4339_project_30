@@ -63,15 +63,22 @@ router.get("/events/:id", (req, res, next) => {
 });
 // DELETE
 // ALSO DELETE THE ATEENDESS
-router.route("/remove").delete(function(req, res) {
-    primarydata.remove({ _id: req.body._id }, function(err, result) {
-      if (err) {
-        console.err(err);
-      } else {
-        res.json(result);
-      }
-    });
-  });
+
+router.put("/attendeeremove/:id", (req, res, next) => { 
+    eventdata.findOneAndUpdate( 
+        { _id: req.params.id,
+        attendees: req.body.attendee_id },
+        {$pull: {attendees: req.body.attendee_id}},
+        (error, data) => {
+            if (error) {
+                return next(error);
+            } else {
+                res.json(data)
+                //res.json('attendee removed');
+            }
+        }
+    );
+});
 
 //POST
 router.post("/", (req, res, next) => { 

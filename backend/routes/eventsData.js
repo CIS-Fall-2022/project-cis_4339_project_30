@@ -4,6 +4,7 @@ const router = express.Router();
 //importing data model schemas
 let { eventdata } = require("../models/models"); 
 
+
 //for organizations we nned a post 
 // add new routers
 //GET all entries from eventdata in postman get eventdata works
@@ -68,7 +69,7 @@ router.get("/client/:id", (req, res, next) => {
 });
 
 //POST
-router.post("/event", (req, res, next) => { 
+router.post("/", (req, res, next) => { 
     eventdata.create(req.body, 
         (error, data) => { 
             if (error) {

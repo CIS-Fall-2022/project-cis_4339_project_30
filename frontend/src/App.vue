@@ -48,7 +48,7 @@
           background: linear-gradient(250deg, #C8102E 70%, #efecec 50.6%);
         "
       >
-        <h1 class="mr-20 text-3xl text-white">Dataplatform</h1>
+        <h1 class="mr-20 text-3xl text-white">Dataplataform</h1>
       </section>
       <div>
         <router-view></router-view>
@@ -57,9 +57,37 @@
   </main>
 </template>
 
+<!--connection for organization, do methods, -->
 <script>
+
 export default {
   name: "App",
+  components :{
+    //do i need a component for the name?
+    
+  },
+  data ()
+  {
+    return {
+
+    }
+  }
+  
+  //let requestURL = fetch('http://localhost:3000/organizationdata/');
+  //requestURL.then(response => response.json())
+  //.then(name => console.log(name))}
+
+  //the request url is a get 
+ // http://localhost:3000/organizationdata/
+ //https://www.geeksforgeeks.org/javascript-fetch-method/#:~:text=The%20fetch()%20method%20requires,then(response%20%3D%3E%20response.
+ //https://medium.com/swlh/making-use-of-apis-in-your-front-end-c168e343bea3 
+ 
+  /*let requestURL = fetch ("http://localhost:3000/organizationdata/");
+  requestURL.then(res => res.json().then(d => { console.log(d)}))
+    }
+  }.catch(error => {
+    console.log(error)
+  })*/
 };
 </script>
 
@@ -70,3 +98,4 @@ export default {
   padding: 18px;
 }
 </style>
+
