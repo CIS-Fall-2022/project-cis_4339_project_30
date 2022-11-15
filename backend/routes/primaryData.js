@@ -56,6 +56,7 @@ router.get("/search/", (req, res, next) => {
     );
 });
 
+//ERROR DONT WORRY
 //GET events for a single client
 router.get("/events/:id", (req, res, next) => { 
     
