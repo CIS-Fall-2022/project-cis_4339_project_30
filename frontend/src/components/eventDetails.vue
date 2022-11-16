@@ -198,6 +198,13 @@
           </div>
           <div class="flex justify-between mt-10 mr-20">
             <button
+              @click="handleEventDelete"
+              type="submit"
+              class="bg-red-700 text-white rounded"
+            >Delete Event</button>
+          </div>
+          <div class="flex justify-between mt-10 mr-20">
+            <button
               type="reset"
               class="border border-red-700 bg-white text-red-700 rounded"
               @click="$router.go(-1)"
@@ -319,6 +326,15 @@ export default {
           console.log(error);
         });
       });
+    },
+    handleEventDelete() {
+      let apiURL = import.meta.env.VITE_ROOT_API + `/eventdata/remove/${this.id}`;
+      axios.delete(apiURL, this.event).then(() => {
+        alert("delete has been saved.");
+        this.$router.back().catch((error) => {
+          console.log(error);
+        });
+      }) ;
     },
     editClient(clientID) {
       this.$router.push({ name: "updateclient", params: { id: clientID } });

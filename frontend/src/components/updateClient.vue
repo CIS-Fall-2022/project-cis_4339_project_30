@@ -113,6 +113,15 @@ export default {
         });
       }) ;
     },
+    handleClientDelete() {
+      let apiURL = import.meta.env.VITE_ROOT_API + `/primarydata/remove/${this.id}`;
+      axios.delete(apiURL, this.client).then(() => {
+        alert("Delete has been saved.");
+        this.$router.back().catch((error) => {
+          console.log(error);
+        });
+      });
+    },
     addToEvent() {
       this.eventsChosen.forEach((event) => {
         let apiURL =
@@ -135,6 +144,21 @@ export default {
         });
       });
     },
+    DeleteEvent() {
+      this.eventsChosen.forEach((event) => {
+        let apiURL =
+          import.meta.env.VITE_ROOT_API + `/primarydata/attendeeremove/` + event._id;
+        axios.put(apiURL, { attendee_id: this.$route.params.id }).then(() => {
+          alert("Delete has been saved.");
+          axios
+            .get(
+              import.meta.env.VITE_ROOT_API +
+                `/eventdata/client/${this.$route.params.id}`
+            )
+        });
+      });
+    },
+    
   },
   validations() {
     return {
@@ -389,6 +413,13 @@ export default {
               :multiple="true"
               label="eventName"
             ></VueMultiselect>
+            <div class="flex justify-between">
+              <button
+                @click="DeleteEvent"
+                type="submit"
+                class="mt-5 bg-red-700 text-white rounded"
+              >delete</button>
+            </div>
             <div class="flex justify-between">
               <button
                 @click="addToEvent"
