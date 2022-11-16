@@ -1,5 +1,6 @@
 const express = require("express"); 
 const router = express.Router(); 
+const organizationid = process.env.organization; // this call the organization id using the database 
 
 //importing data model schemas
 let { primarydata } = require("../models/models"); 
@@ -8,7 +9,7 @@ let { organizationdata } = require("../models/models");
 
 //GET all entries
 router.get("/", (req, res, next) => { 
-    primarydata.find( 
+    primarydata.find( {organizationDataSchema_id: organizationid},
         (error, data) => {
             if (error) {
                 return next(error);
@@ -19,7 +20,7 @@ router.get("/", (req, res, next) => {
     ).sort({ 'updatedAt': -1 }).limit(10);
 });
 
-//GET single entry by ID
+//GET single entry by ID 
 router.get("/id/:id", (req, res, next) => {
     primarydata.find( 
         { _id: req.params.id }, 
@@ -38,7 +39,7 @@ router.get("/id/:id", (req, res, next) => {
 router.get("/search/", (req, res, next) => { 
     let dbQuery = "";
     if (req.query["searchBy"] === 'name') {
-        dbQuery = { firstName: { $regex: `^${req.query["firstName"]}`, $options: "i" }, lastName: { $regex: `^${req.query["lastName"]}`, $options: "i" } }
+        dbQuery = { firstName: { $regex: `^${req.query["firstName"]}`, $options: "i" }, lastName: { $regex: `^${req.query["lastName"]}`, $options: "i" } , organizationDataSchema_id: organizationid}
     } else if (req.query["searchBy"] === 'number') {
         dbQuery = {
             "phoneNumbers.primaryPhone": { $regex: `^${req.query["phoneNumbers.primaryPhone"]}`, $options: "i" }
@@ -58,9 +59,10 @@ router.get("/search/", (req, res, next) => {
 
 //ERROR DONT WORRY
 //GET events for a single client
-router.get("/events/:id", (req, res, next) => { 
-    
-});
+//router.get("/events/:id", (req, res, next) => { 
+
+//});
+
 // DELETE
 // ALSO DELETE THE ATEENDESS
 
@@ -82,6 +84,8 @@ router.put("/attendeeremove/:id", (req, res, next) => {
 
 //POST
 router.post("/", (req, res, next) => { 
+    req.body.organizationDataSchema_id = organizationid
+    console.log(req.body)
     primarydata.create( 
         req.body,
         (error, data) => { 

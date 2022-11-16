@@ -1,15 +1,18 @@
 const express = require("express");
 const router = express.Router();
+const organizationid = process.env.organization; // this call the organization id 
+// organizatationid needs to be filter 
 
 //importing data model schemas
 let { eventdata } = require("../models/models"); 
-
+let { organizationdata } = require("../models/models"); 
 
 //for organizations we nned a post 
 // add new routers
 //GET all entries from eventdata in postman get eventdata works
 router.get("/", (req, res, next) => { 
-    eventdata.find((error, data) => {
+    eventdata.find({organizationDataSchema_id: organizationid}, // this will filter the id from organization
+        (error, data) => {
             if (error) {
                 return next(error);
             } else {
@@ -36,10 +39,11 @@ router.get("/id/:id", (req, res, next) => {
 router.get("/search/", (req, res, next) => { 
     let dbQuery = "";
     if (req.query["searchBy"] === 'name') {
-        dbQuery = { eventName: { $regex: `^${req.query["eventName"]}`, $options: "i" } }
+        dbQuery = { eventName: { $regex: `^${req.query["eventName"]}`, $options: "i" } , organizationDataSchema_id: organizationid}
     } else if (req.query["searchBy"] === 'date') {
         dbQuery = {
-            date:  req.query["eventDate"]
+            date:  req.query["eventDate"], organizationDataSchema_id: organizationid
+             // adding variables because when serching for the event make sure its in the select organization
         }
     };
     eventdata.find( 
@@ -68,8 +72,9 @@ router.get("/client/:id", (req, res, next) => {
     );
 });
 
-//POST
+//POST assign 
 router.post("/", (req, res, next) => { 
+    req.body.organizationDataSchema_id = organizationid // this add the event id to the body
     eventdata.create(req.body, 
         (error, data) => { 
             if (error) {

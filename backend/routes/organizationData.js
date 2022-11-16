@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const organizationid = process.env.organization;
 
 //importing data model schemas
 let { organizationdata } = require("../models/models"); 
 
-
+// dinamyc 
 //POST add data to the database 
 router.post("/", (req, res, next) => { 
     organizationdata.create(req.body, 
@@ -19,15 +20,14 @@ router.post("/", (req, res, next) => {
     );
 });
 
-//GET all entries, just the name you need for the organization
-router.get("/:name", (req, res, next) => { 
-    console.log( req.params.name)
-    organizationdata.findOne( {name: req.params.name},
+//GET all entries, just the name you need for the organization 
+//change to id 
+router.get("/name", (req, res, next) => {  //
+    //console.log( req.params.id)
+    organizationdata.find( {_id: organizationid}, 
         (error, data) => {
             if (error) {
                 return next(error);
-            } else if (data ===null ) { 
-                res.status(404).send('Organization not found');
             }
             else {
                 res.json(data)
@@ -35,5 +35,6 @@ router.get("/:name", (req, res, next) => {
         }
     );
 });
+
 
 module.exports = router;
