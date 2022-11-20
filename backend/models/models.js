@@ -100,6 +100,11 @@ let organizationDataSchema = new Schema({
 }, {
     collection: 'organizationData'
 });
+//From the collection OrganizationDataSchema we select the _id from it to link it
+//to the others collections(primary and event)
+//organizationDataSchema_id: { type: String }, //LINK FOR ORGANIZATION SCHEMA
+
+//this is extra brainstorming about how to connect by id or name, however id is unique not name
 //organizationDataSchema_id: { type: String, default: uuid.v1 }, reference
 //organizationDataSchemaorganizationName: { type: String, require: true} 
 
