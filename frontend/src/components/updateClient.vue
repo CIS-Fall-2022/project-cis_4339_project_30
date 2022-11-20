@@ -102,15 +102,17 @@ export default {
         this.$router.back().catch((error) => {
           console.log(error);
         });
-      });
+      }) ;
     },
+    //this is the method for the button to delete a client
     handleClientDelete() {
       let apiURL = import.meta.env.VITE_ROOT_API + `/primarydata/remove/${this.id}`;
       axios.delete(apiURL, this.client).then(() => {
+        alert("delete has been saved.");
         this.$router.back().catch((error) => {
           console.log(error);
         });
-      });
+      }) ;
     },
     addToEvent() {
       this.eventsChosen.forEach((event) => {
@@ -136,6 +138,7 @@ export default {
         });
       });
     },
+    //This is separate method needed because we made deleting an attendee from an event it's own delete button  
     DeleteEvent() {
       this.eventsChosen.forEach((event) => {
         let apiURL =
@@ -357,6 +360,7 @@ export default {
               class="bg-red-700 text-white rounded"
             >Update Client</button>
           </div>
+          <!--This is the delete button the client-->
           <div class="flex justify-between mt-10 mr-20">
             <button
               @click="handleClientDelete"
@@ -406,6 +410,7 @@ export default {
               label="eventName"
             ></VueMultiselect>
             <div class="flex justify-between">
+              <!--This is the button to delete an attendee from an event-->
               <button
                 @click="DeleteEvent"
                 type="submit"
