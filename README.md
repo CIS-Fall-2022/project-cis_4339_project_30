@@ -16,6 +16,10 @@ cd frontend
 ```
 Follow instructions in frontend README
 
+## We also created a database in the cloud 
+the connection is in the mongoURL in the .env file
+
+
 ## This is the link for the API DOCUMENTATION 
 
 https://documenter.getpostman.com/view/17855228/2s83zfS6MK
