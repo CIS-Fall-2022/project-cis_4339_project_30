@@ -196,6 +196,7 @@
               class="bg-red-700 text-white rounded"
             >Update Event</button>
           </div>
+          <!-- this is the event delete button -->
           <div class="flex justify-between mt-10 mr-20">
             <button
               @click="handleEventDelete"
@@ -327,6 +328,7 @@ export default {
         });
       });
     },
+    //this is the delete method for the delete button 
     handleEventDelete() {
       let apiURL = import.meta.env.VITE_ROOT_API + `/eventdata/remove/${this.id}`;
       axios.delete(apiURL, this.event).then(() => {

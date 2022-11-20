@@ -161,6 +161,7 @@ router.put("/addAttendee/:id", (req, res, next) => {
                         }
                     );
                 }
+                //this is my improved error hanlding for the frontend
                 else {
                     const broke = 'already added'
                     res.send(broke)}
