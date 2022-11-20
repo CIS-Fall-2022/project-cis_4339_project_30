@@ -98,31 +98,6 @@ router.route("/remove/:id").delete(function(req, res) {
     });
   });
 
-
-/*
-// Counts total number of event attendees for each event
-router.get("/eventAttendees",(req,res,next)=>{​​​​​​​​
-    varcheckDate=newDate() 
-    
-    eventdata.aggregate([
-    {​​​​​​​​$match:{​​​​​​​​date:{​​​​​​​​
-    $gt:newDate(checkDate.setMonth(checkDate.getMonth() -2)),
-    $lt:newDate()
-    }​​​​​​​​}​​​​​​​​}​​​​​​​​,
-    {​​​​​​​​$group:{​​​​​​​​_id:"$eventName",total:{​​​​​​​​$sum:{​​​​​​​​$size:"$attendees"}​​​​​​​​}​​​​​​​​}​​​​​​​​}​​​​​​​​
-     ],
-    (error,data)=>{​​​​​​​​
-    if (error) {​​​​​​​​
-    returnnext(error);
-    }​​​​​​​​else{​​​​​​​​
-    res.json(data);
-    }​​​​​​​​
-    }​​​​​​​​
-     )
-    }​​​​​​​​);
-*/
-
-
 //PUT
 router.put("/:id", (req, res, next) => {
     eventdata.findOneAndUpdate(
@@ -140,7 +115,7 @@ router.put("/:id", (req, res, next) => {
 // DELETE ALSO INCLUDES THE ATTENDEES
 //PUT add attendee to event
 router.put("/addAttendee/:id", (req, res, next) => {
-    //only add attendee if not yet signed uo
+    //only add attendee if not yet signed u o
     eventdata.find( 
         { _id: req.params.id, attendees: req.body.attendee }, 
         (error, data) => { 

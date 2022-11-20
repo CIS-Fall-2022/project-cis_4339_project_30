@@ -1,11 +1,29 @@
 <!--Laura set up the graph to dasboard based on the module 10 code-->
 <template>
-  <main>
-    <div>
+  <div>
       <h1 class="font-bold text-4xl text-red-700 tracking-widest text-center mt-10">Welcome</h1>
     </div>
+  <main>
+    <div class="row justify-content-center"> <!--THIS IS TO CREATE TABLE-->
+      <table class="table table-striped">
+        <thead class="table-dark">
+          <strong>Table </strong>
+          <tr>
+            <th>Event Name</th>
+            <th>Total Attendees</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+         <tr v-for="event in Events" :key="event._id">
+            <td>{{ event._id }}</td>
+            <td>{{ event.total }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div class="column">
-        <h3>Bar Chart - Receiving Data from backend</h3>
+        <strong>Bar Chart </strong>
         <div>
           <div>
             <EventBar
@@ -60,10 +78,20 @@ export default {
   },
   data() {
     return {
-      attendees: [],
+      labels: [], //for graph
+      attendees: [], //for graph
+      Events:[], // for table to store the events
       loading: false,
       error: null,
     };
+  },
+  created() { // this will display the data from the graph
+            let apiURL = 'http://localhost:3000/eventdata/eventAttendees/';
+            axios.get(apiURL).then(res => {
+                this.Events = res.data;
+            }).catch(error => {
+                console.log(error)
+            });
   },
   methods: {
     async fetchData() {
@@ -73,7 +101,8 @@ export default {
         const url = `http://localhost:3000/eventdata/eventAttendees/`;
         const response = await axios.get(url);
         //"re-organizing" - mapping json from the response
-        this.attendees = response.data.map((item) => item.attendees);
+        this.labels = response.data.map((item) => item._id);
+        this.attendees = response.data.map((item) => item.total);
       } catch (err) {
         if (err.response) {
           // client received an error response (5xx, 4xx)

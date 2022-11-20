@@ -88,18 +88,3 @@ export default {
 }
 </style>
 
-//let requestURL = fetch('http://localhost:3000/organizationdata/');
-  //requestURL.then(response => response.json())
-  //.then(name => console.log(name))}
-
-  //the request url is a get 
- // http://localhost:3000/organizationdata/
- //https://www.geeksforgeeks.org/javascript-fetch-method/#:~:text=The%20fetch()%20method%20requires,then(response%20%3D%3E%20response.
- //https://medium.com/swlh/making-use-of-apis-in-your-front-end-c168e343bea3 
- 
-  /*let requestURL = fetch ("http://localhost:3000/organizationdata/");
-  requestURL.then(res => res.json().then(d => { console.log(d)}))
-    }
-  }.catch(error => {
-    console.log(error)
-  })*/
