@@ -73,8 +73,9 @@ router.get("/client/:id", (req, res, next) => {
 });
 
 //POST assign 
-router.post("/", (req, res, next) => { 
+router.post("/event", (req, res, next) => { 
     req.body.organizationDataSchema_id = organizationid // this add the event id to the body
+    //console.log(req.body)
     eventdata.create(req.body, 
         (error, data) => { 
             if (error) {
