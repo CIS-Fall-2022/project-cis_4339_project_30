@@ -161,14 +161,30 @@ router.put("/addAttendee/:id", (req, res, next) => {
                         }
                     );
                 }
-                else {
-                    const broke = 'already added'
-                    res.send(broke)}
                 
             }
         }
     );
     
 });
-
+// THIS IS THE COUNTS FOR ATTENDIES LAST 2 MONTHS 
+// Counts total number of event attendees for each event
+router.get("/eventAttendees", (req, res, next) => { 
+    req.body.organizationDataSchema_id = organizationid
+    var checkDate = new Date() 
+    eventdata.aggregate([
+            {$match: {date: {
+                $gt : new Date(checkDate.setMonth(checkDate.getMonth() - 2)),
+                $lt : new Date()
+            }} },
+            {$group: {_id: "$eventName", total: { $sum: { $size:"$attendees"}}}}
+        ], 
+            (error, data) => {
+                if (error) {
+                    return next(error);
+                } else {
+                    res.json(data);
+                }}
+            )
+        });
 module.exports = router;
