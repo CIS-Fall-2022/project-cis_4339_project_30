@@ -33,7 +33,7 @@ export default {
       options: {
         scales: {
             y: {
-                min: 100
+                min: 10
             }
         }
       }

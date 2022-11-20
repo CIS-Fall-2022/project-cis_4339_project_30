@@ -107,7 +107,6 @@ export default {
     handleClientDelete() {
       let apiURL = import.meta.env.VITE_ROOT_API + `/primarydata/remove/${this.id}`;
       axios.delete(apiURL, this.client).then(() => {
-        alert("Delete has been saved.");
         this.$router.back().catch((error) => {
           console.log(error);
         });
