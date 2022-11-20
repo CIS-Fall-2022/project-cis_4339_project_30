@@ -85,7 +85,7 @@ export default {
       error: null,
     };
   },
-  created() { // this will display the data from the graph
+  created() { // this will display the data for the table
             let apiURL = 'http://localhost:3000/eventdata/eventAttendees/';
             axios.get(apiURL).then(res => {
                 this.Events = res.data;
