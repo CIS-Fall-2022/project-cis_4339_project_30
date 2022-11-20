@@ -110,7 +110,7 @@ router.put("/:id", (req, res, next) => {
 // DELETE ALSO INCLUDES THE ATTENDEES
 //PUT add attendee to event
 router.put("/addAttendee/:id", (req, res, next) => {
-    //only add attendee if not yet signed uo
+    //only add attendee if not yet signed u o
     eventdata.find( 
         { _id: req.params.id, attendees: req.body.attendee }, 
         (error, data) => { 
@@ -133,7 +133,7 @@ router.put("/addAttendee/:id", (req, res, next) => {
                 }
                 else {
                     const broke = 'already added'
-                    res.send(broke)}
+                    res.send(broke)};
                 
             }
         }
